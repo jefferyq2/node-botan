@@ -114,7 +114,7 @@ void pk::DoingGenerate(uv_work_t *request) {
   }
 }
 
-void pk::AfterGenerate(uv_work_t *request) {
+void pk::AfterGenerate(uv_work_t *request, int status) {
   GenerateBaton *baton = static_cast<GenerateBaton *>(request->data);
 
   Handle<Value> error = Null();
@@ -178,7 +178,7 @@ void pk::DoingLoadPublicKey(uv_work_t *request) {
   }
 }
 
-void pk::AfterLoadPublicKey(uv_work_t *request) {
+void pk::AfterLoadPublicKey(uv_work_t *request, int status) {
   LoadPublicKeyBaton *baton = static_cast<LoadPublicKeyBaton *>(request->data);
 
   Handle<Value> error = Null();
@@ -255,7 +255,7 @@ void pk::DoingLoadPrivateKey(uv_work_t *request) {
   }
 }
 
-void pk::AfterLoadPrivateKey(uv_work_t *request) {
+void pk::AfterLoadPrivateKey(uv_work_t *request, int status) {
   LoadPrivateKeyBaton *baton = static_cast<LoadPrivateKeyBaton *>(request->data);
 
   Handle<Value> error = Null();
@@ -306,7 +306,7 @@ void PublicKey::DoingToString(uv_work_t *request) {
   }
 }
 
-void PublicKey::AfterToString(uv_work_t *request) {
+void PublicKey::AfterToString(uv_work_t *request, int status) {
   PublicKeyToStringBaton *baton =
     static_cast<PublicKeyToStringBaton *>(request->data);
 
@@ -368,7 +368,7 @@ void PrivateKey::DoingToString(uv_work_t *request) {
   }
 }
 
-void PrivateKey::AfterToString(uv_work_t *request) {
+void PrivateKey::AfterToString(uv_work_t *request, int status) {
   PrivateKeyToStringBaton *baton =
     static_cast<PrivateKeyToStringBaton *>(request->data);
 
@@ -426,7 +426,7 @@ void PublicKey::DoingEncrypt(uv_work_t *request) {
   }
 }
 
-void PublicKey::AfterEncrypt(uv_work_t *request) {
+void PublicKey::AfterEncrypt(uv_work_t *request, int status) {
   PublicKeyEncryptBaton *baton =
     static_cast<PublicKeyEncryptBaton *>(request->data);
 
@@ -478,7 +478,7 @@ void PrivateKey::DoingDecrypt(uv_work_t *request) {
   }
 }
 
-void PrivateKey::AfterDecrypt(uv_work_t *request) {
+void PrivateKey::AfterDecrypt(uv_work_t *request, int status) {
   PrivateKeyDecryptBaton *baton =
     static_cast<PrivateKeyDecryptBaton *>(request->data);
 
@@ -608,7 +608,7 @@ void cipher::DoingEncrypt(uv_work_t *request) {
   }
 }
 
-void cipher::AfterEncrypt(uv_work_t *request) {
+void cipher::AfterEncrypt(uv_work_t *request, int status) {
   EncryptBaton *baton = static_cast<EncryptBaton *>(request->data);
 
   Handle<Value> error = Null();
@@ -736,7 +736,7 @@ void cipher::DoingDecrypt(uv_work_t *request) {
   }
 }
 
-void cipher::AfterDecrypt(uv_work_t *request) {
+void cipher::AfterDecrypt(uv_work_t *request, int status) {
   DecryptBaton *baton = static_cast<DecryptBaton *>(request->data);
 
   Handle<Value> error = Null();
@@ -833,7 +833,7 @@ void cipher::DoingInitialiseEncryptor(uv_work_t *request) {
   }
 }
 
-void cipher::AfterInitialiseEncryptor(uv_work_t *request) {
+void cipher::AfterInitialiseEncryptor(uv_work_t *request, int status) {
   InitialiseEncryptorBaton *baton =
     static_cast<InitialiseEncryptorBaton *>(request->data);
 
@@ -902,7 +902,7 @@ void Encryptor::DoingUpdate(uv_work_t *request) {
   }
 }
 
-void Encryptor::AfterUpdate(uv_work_t *request) {
+void Encryptor::AfterUpdate(uv_work_t *request, int status) {
   EncryptorUpdateBaton *baton = static_cast<EncryptorUpdateBaton *>(request->data);
 
 
@@ -952,7 +952,7 @@ void Encryptor::DoingFinal(uv_work_t *request) {
   }
 }
 
-void Encryptor::AfterFinal(uv_work_t *request) {
+void Encryptor::AfterFinal(uv_work_t *request, int status) {
   EncryptorFinalBaton *baton = static_cast<EncryptorFinalBaton *>(request->data);
 
   Handle<Value> error = Null();
@@ -1044,7 +1044,7 @@ void cipher::DoingInitialiseDecryptor(uv_work_t *request) {
   }
 }
 
-void cipher::AfterInitialiseDecryptor(uv_work_t *request) {
+void cipher::AfterInitialiseDecryptor(uv_work_t *request, int status) {
   InitialiseDecryptorBaton *baton =
     static_cast<InitialiseDecryptorBaton *>(request->data);
 
@@ -1111,7 +1111,7 @@ void Decryptor::DoingUpdate(uv_work_t *request) {
   }
 }
 
-void Decryptor::AfterUpdate(uv_work_t *request) {
+void Decryptor::AfterUpdate(uv_work_t *request, int status) {
   DecryptorUpdateBaton *baton = static_cast<DecryptorUpdateBaton *>(request->data);
 
   Handle<Value> error = Null();
@@ -1161,7 +1161,7 @@ void Decryptor::DoingFinal(uv_work_t *request) {
   }
 }
 
-void Decryptor::AfterFinal(uv_work_t *request) {
+void Decryptor::AfterFinal(uv_work_t *request, int status) {
   DecryptorFinalBaton *baton = static_cast<DecryptorFinalBaton *>(request->data);
 
   Handle<Value> error = Null();
@@ -1273,7 +1273,7 @@ void codec::DoingEncode(uv_work_t *request) {
   }
 }
 
-void codec::AfterEncode(uv_work_t *request) {
+void codec::AfterEncode(uv_work_t *request, int status) {
   EncodeBaton *baton = static_cast<EncodeBaton *>(request->data);
 
   Handle<Value> error = Null();
@@ -1359,7 +1359,7 @@ void codec::DoingDecode(uv_work_t *request) {
   }
 }
 
-void codec::AfterDecode(uv_work_t *request) {
+void codec::AfterDecode(uv_work_t *request, int status) {
   DecodeBaton *baton = static_cast<DecodeBaton *>(request->data);
 
   Handle<Value> error = Null();
@@ -1437,7 +1437,7 @@ void mac::DoingGenerate(uv_work_t *request) {
   }
 }
 
-void mac::AfterGenerate(uv_work_t *request) {
+void mac::AfterGenerate(uv_work_t *request, int status) {
   GenerateBaton *baton = static_cast<GenerateBaton *>(request->data);
 
   Handle<Value> error = Null();
@@ -1487,7 +1487,7 @@ void mac::DoingInitialise(uv_work_t *request) {
   }
 }
 
-void mac::AfterInitialise(uv_work_t *request) {
+void mac::AfterInitialise(uv_work_t *request, int status) {
   InitialiseBaton *baton = static_cast<InitialiseBaton *>(request->data);
 
   Handle<Value> error = Null();
@@ -1562,7 +1562,7 @@ void Mac::DoingUpdate(uv_work_t *request) {
   }
 }
 
-void Mac::AfterUpdate(uv_work_t *request) {
+void Mac::AfterUpdate(uv_work_t *request, int status) {
   MacUpdateBaton *baton = static_cast<MacUpdateBaton *>(request->data);
 
   Handle<Value> error = Null();
@@ -1605,7 +1605,7 @@ void Mac::DoingFinal(uv_work_t *request) {
   }
 }
 
-void Mac::AfterFinal(uv_work_t *request) {
+void Mac::AfterFinal(uv_work_t *request, int status) {
   MacFinalBaton *baton = static_cast<MacFinalBaton *>(request->data);
 
   Handle<Value> error = Null();
@@ -1693,7 +1693,7 @@ void hash::DoingGenerate(uv_work_t *request) {
   }
 }
 
-void hash::AfterGenerate(uv_work_t *request) {
+void hash::AfterGenerate(uv_work_t *request, int status) {
   GenerateBaton *baton = static_cast<GenerateBaton *>(request->data);
 
   Handle<Value> error = Null();
@@ -1741,7 +1741,7 @@ void hash::DoingInitialise(uv_work_t *request) {
   }
 }
 
-void hash::AfterInitialise(uv_work_t *request) {
+void hash::AfterInitialise(uv_work_t *request, int status) {
   InitialiseBaton *baton = static_cast<InitialiseBaton *>(request->data);
 
   Handle<Value> error = Null();
@@ -1816,7 +1816,7 @@ void Hash::DoingUpdate(uv_work_t *request) {
   }
 }
 
-void Hash::AfterUpdate(uv_work_t *request) {
+void Hash::AfterUpdate(uv_work_t *request, int status) {
   HashUpdateBaton *baton = static_cast<HashUpdateBaton *>(request->data);
 
   Handle<Value> error = Null();
@@ -1859,7 +1859,7 @@ void Hash::DoingFinal(uv_work_t *request) {
   }
 }
 
-void Hash::AfterFinal(uv_work_t *request) {
+void Hash::AfterFinal(uv_work_t *request, int status) {
   HashFinalBaton *baton = static_cast<HashFinalBaton *>(request->data);
 
   Handle<Value> error = Null();
@@ -1939,7 +1939,7 @@ void pbkdf::DoingGenerate(uv_work_t *request) {
   }
 }
 
-void pbkdf::AfterGenerate(uv_work_t *request) {
+void pbkdf::AfterGenerate(uv_work_t *request, int status) {
   GenerateBaton *baton = static_cast<GenerateBaton *>(request->data);
 
   Handle<Value> error = Null();
@@ -2001,7 +2001,7 @@ void rnd::DoingGenerateDigits(uv_work_t *request) {
   }
 }
 
-void rnd::AfterGenerateDigits(uv_work_t *request) {
+void rnd::AfterGenerateDigits(uv_work_t *request, int status) {
   GenerateDigitsBaton *baton = static_cast<GenerateDigitsBaton *>(request->data);
 
   Handle<Value> error = Null();
@@ -2070,7 +2070,7 @@ void rnd::DoingGenerateBytes(uv_work_t *request) {
   }
 }
 
-void rnd::AfterGenerateBytes(uv_work_t *request) {
+void rnd::AfterGenerateBytes(uv_work_t *request, int status) {
   GenerateBytesBaton *baton = static_cast<GenerateBytesBaton *>(request->data);
 
   Handle<Value> error = Null();

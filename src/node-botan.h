@@ -34,7 +34,7 @@ namespace pk {
 
   static v8::Handle<v8::Value> Generate(const v8::Arguments &args);
   static void DoingGenerate(uv_work_t *request);
-  static void AfterGenerate(uv_work_t *request);
+  static void AfterGenerate(uv_work_t *request, int status);
 
   class GenerateBaton : public Baton {
     public:
@@ -47,7 +47,7 @@ namespace pk {
 
   static v8::Handle<v8::Value> LoadPublicKey(const v8::Arguments &args);
   static void DoingLoadPublicKey(uv_work_t *request);
-  static void AfterLoadPublicKey(uv_work_t *request);
+  static void AfterLoadPublicKey(uv_work_t *request, int status);
 
   class LoadPublicKeyBaton : public Baton {
     public:
@@ -70,11 +70,11 @@ namespace pk {
     protected:
       static v8::Handle<v8::Value> Encrypt(const v8::Arguments &args);
       static void DoingEncrypt(uv_work_t *request);
-      static void AfterEncrypt(uv_work_t *request);
+      static void AfterEncrypt(uv_work_t *request, int status);
 
       static v8::Handle<v8::Value> ToString(const v8::Arguments &args);
       static void DoingToString(uv_work_t *request);
-      static void AfterToString(uv_work_t *request);
+      static void AfterToString(uv_work_t *request, int status);
 
     private:
       ~PublicKey();
@@ -120,7 +120,7 @@ namespace pk {
 
   static v8::Handle<v8::Value> LoadPrivateKey(const v8::Arguments &args);
   static void DoingLoadPrivateKey(uv_work_t *request);
-  static void AfterLoadPrivateKey(uv_work_t *request);
+  static void AfterLoadPrivateKey(uv_work_t *request, int status);
 
   class LoadPrivateKeyBaton : public Baton {
     public:
@@ -154,11 +154,11 @@ namespace pk {
     protected:
       static v8::Handle<v8::Value> Decrypt(const v8::Arguments &args);
       static void DoingDecrypt(uv_work_t *request);
-      static void AfterDecrypt(uv_work_t *request);
+      static void AfterDecrypt(uv_work_t *request, int status);
 
       static v8::Handle<v8::Value> ToString(const v8::Arguments &args);
       static void DoingToString(uv_work_t *request);
-      static void AfterToString(uv_work_t *request);
+      static void AfterToString(uv_work_t *request, int status);
 
     private:
       ~PrivateKey();
@@ -218,7 +218,7 @@ namespace cipher {
 
   static v8::Handle<v8::Value> Encrypt(const v8::Arguments &args);
   static void DoingEncrypt(uv_work_t *request);
-  static void AfterEncrypt(uv_work_t *request);
+  static void AfterEncrypt(uv_work_t *request, int status);
 
   class EncryptBaton : public Baton {
     public:
@@ -266,7 +266,7 @@ namespace cipher {
 
   static v8::Handle<v8::Value> Decrypt(const v8::Arguments &args);
   static void DoingDecrypt(uv_work_t *request);
-  static void AfterDecrypt(uv_work_t *request);
+  static void AfterDecrypt(uv_work_t *request, int status);
 
   class DecryptBaton : public Baton {
     public:
@@ -314,7 +314,7 @@ namespace cipher {
 
   static v8::Handle<v8::Value> InitialiseEncryptor(const v8::Arguments &args);
   static void DoingInitialiseEncryptor(uv_work_t *request);
-  static void AfterInitialiseEncryptor(uv_work_t *request);
+  static void AfterInitialiseEncryptor(uv_work_t *request, int status);
 
   static const std::string DEFAULT_CIPHER_TYPE = "AES-256/EAX";
 
@@ -351,11 +351,11 @@ namespace cipher {
     protected:
       static v8::Handle<v8::Value> Update(const v8::Arguments &args);
       static void DoingUpdate(uv_work_t *request);
-      static void AfterUpdate(uv_work_t *request);
+      static void AfterUpdate(uv_work_t *request, int status);
 
       static v8::Handle<v8::Value> Final(const v8::Arguments &args);
       static void DoingFinal(uv_work_t *request);
-      static void AfterFinal(uv_work_t *request);
+      static void AfterFinal(uv_work_t *request, int status);
 
     private:
       ~Encryptor();
@@ -398,7 +398,7 @@ namespace cipher {
 
   static v8::Handle<v8::Value> InitialiseDecryptor(const v8::Arguments &args);
   static void DoingInitialiseDecryptor(uv_work_t *request);
-  static void AfterInitialiseDecryptor(uv_work_t *request);
+  static void AfterInitialiseDecryptor(uv_work_t *request, int status);
 
   class InitialiseDecryptorBaton : public Baton {
     public:
@@ -433,11 +433,11 @@ namespace cipher {
     protected:
       static v8::Handle<v8::Value> Update(const v8::Arguments &args);
       static void DoingUpdate(uv_work_t *request);
-      static void AfterUpdate(uv_work_t *request);
+      static void AfterUpdate(uv_work_t *request, int status);
 
       static v8::Handle<v8::Value> Final(const v8::Arguments &args);
       static void DoingFinal(uv_work_t *request);
-      static void AfterFinal(uv_work_t *request);
+      static void AfterFinal(uv_work_t *request, int status);
 
     private:
       ~Decryptor();
@@ -488,7 +488,7 @@ namespace codec {
 
   static v8::Handle<v8::Value> Encode(const v8::Arguments &args);
   static void DoingEncode(uv_work_t *request);
-  static void AfterEncode(uv_work_t *request);
+  static void AfterEncode(uv_work_t *request, int status);
 
   class EncodeBaton : public Baton {
     public:
@@ -511,7 +511,7 @@ namespace codec {
 
   static v8::Handle<v8::Value> Decode(const v8::Arguments &args);
   static void DoingDecode(uv_work_t *request);
-  static void AfterDecode(uv_work_t *request);
+  static void AfterDecode(uv_work_t *request, int status);
 
   class DecodeBaton : public Baton {
     public:
@@ -536,7 +536,7 @@ namespace mac {
 
   static v8::Handle<v8::Value> Generate(const v8::Arguments &args);
   static void DoingGenerate(uv_work_t *request);
-  static void AfterGenerate(uv_work_t *request);
+  static void AfterGenerate(uv_work_t *request, int status);
 
   class GenerateBaton : public Baton {
     public:
@@ -562,7 +562,7 @@ namespace mac {
 
   static v8::Handle<v8::Value> Initialise(const v8::Arguments &args);
   static void DoingInitialise(uv_work_t *request);
-  static void AfterInitialise(uv_work_t *request);
+  static void AfterInitialise(uv_work_t *request, int status);
 
   class InitialiseBaton : public Baton {
     public:
@@ -588,11 +588,11 @@ namespace mac {
     protected:
       static v8::Handle<v8::Value> Update(const v8::Arguments &args);
       static void DoingUpdate(uv_work_t *request);
-      static void AfterUpdate(uv_work_t *request);
+      static void AfterUpdate(uv_work_t *request, int status);
 
       static v8::Handle<v8::Value> Final(const v8::Arguments &args);
       static void DoingFinal(uv_work_t *request);
-      static void AfterFinal(uv_work_t *request);
+      static void AfterFinal(uv_work_t *request, int status);
 
     private:
       ~Mac();
@@ -633,7 +633,7 @@ namespace hash {
 
   static v8::Handle<v8::Value> Generate(const v8::Arguments &args);
   static void DoingGenerate(uv_work_t *request);
-  static void AfterGenerate(uv_work_t *request);
+  static void AfterGenerate(uv_work_t *request, int status);
 
   class GenerateBaton : public Baton {
     public:
@@ -656,7 +656,7 @@ namespace hash {
 
   static v8::Handle<v8::Value> Initialise(const v8::Arguments &args);
   static void DoingInitialise(uv_work_t *request);
-  static void AfterInitialise(uv_work_t *request);
+  static void AfterInitialise(uv_work_t *request, int status);
 
   class InitialiseBaton : public Baton {
     public:
@@ -679,11 +679,11 @@ namespace hash {
     protected:
       static v8::Handle<v8::Value> Update(const v8::Arguments &args);
       static void DoingUpdate(uv_work_t *request);
-      static void AfterUpdate(uv_work_t *request);
+      static void AfterUpdate(uv_work_t *request, int status);
 
       static v8::Handle<v8::Value> Final(const v8::Arguments &args);
       static void DoingFinal(uv_work_t *request);
-      static void AfterFinal(uv_work_t *request);
+      static void AfterFinal(uv_work_t *request, int status);
 
     private:
       ~Hash();
@@ -728,7 +728,7 @@ namespace pbkdf {
 
   static v8::Handle<v8::Value> Generate(const v8::Arguments &args);
   static void DoingGenerate(uv_work_t *request);
-  static void AfterGenerate(uv_work_t *request);
+  static void AfterGenerate(uv_work_t *request, int status);
 
   class GenerateBaton : public Baton {
     public:
@@ -759,7 +759,7 @@ namespace rnd {
 
   static v8::Handle<v8::Value> GenerateDigits(const v8::Arguments &args);
   static void DoingGenerateDigits(uv_work_t *request);
-  static void AfterGenerateDigits(uv_work_t *request);
+  static void AfterGenerateDigits(uv_work_t *request, int status);
 
   class GenerateDigitsBaton : public Baton {
     public:
@@ -777,7 +777,7 @@ namespace rnd {
 
   static v8::Handle<v8::Value> GenerateBytes(const v8::Arguments &args);
   static void DoingGenerateBytes(uv_work_t *request);
-  static void AfterGenerateBytes(uv_work_t *request);
+  static void AfterGenerateBytes(uv_work_t *request, int status);
 
   enum ByteType { binary, base64, hex };
 

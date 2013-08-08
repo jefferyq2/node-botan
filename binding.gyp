@@ -8,6 +8,7 @@
       'cflags!': [ '-fno-exceptions', '-fno-rtti' ],
       'cflags_cc!': [ '-fno-exceptions', '-fno-rtti' ],
       'cflags': [
+        '<!@(pkg-config --cflags botan-1.10)',
         '-g',
         '-D_FILE_OFFSET_BITS=64',
         '-D_LARGEFILE_SOURCE',
